@@ -1,0 +1,184 @@
+{% extends "adminindex.html" %}
+{% block content %}
+<br>
+
+<style>
+    .offcanvas-body input, select{
+        width:90%;
+        padding: 6px;
+        outline: .5px solid lightblue;
+        border-radius: 10px;
+        border: .5px solid gray;
+    }
+</style>
+
+<div class="container mb-5">
+    {% for message in messages  %}
+      
+    <div class="alert {message.tags}} alert-dismissible fade show fixed-to" role="alert">
+        <strong>Hey! </strong> {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button class="btn btn-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight1" aria-controls="offcanvasRight1"><i class="bi bi-plus-lg"></i> Add Hotel </button>
+            <button class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight2"><i class="bi bi-plus-lg"></i> Add Restaurent </button>
+            <button class="btn btn-info" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-plus-lg"></i> Add Guides </button>
+        </div>
+        <div class="col-md-12">
+            <h5 class="text-center">Guids</h5>
+            <div class="boxe">
+                <table class="table table-dark table-stripped">
+                    <tr>
+                        <th>Guid name</th>
+                        <th>Phone</th>
+                        <th>Destination</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for dst in guids  %}
+
+                    <tr>
+                        <td>
+                            <!-- <img src="{{dst.image.url}}" style="width:70px;height:70px;border-radius:50%;" alt=""> -->
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{dst.Guid_Name}}
+                        </td>
+                        <td>{{dst.Phone}}</td>
+                        <td>{{dst.Destination_Near}}</td>
+                        <td><a href="{%url 'DeleteGuide' dst.id %}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                      
+                    {% endfor %}
+                </table>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-12">
+            <h5 class="text-center">Hotels</h5>
+            <div class="boxe">
+                <table class="table table-dark table-stripped">
+                    <tr>
+                        <th>Hotel Name</th>
+                        <th>Room Category</th>
+                        <th>Destination Near</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for dst in hotel  %}
+
+                    <tr>
+                        <td>
+                            <!-- <img src="{{dst.image.url}}" style="width:70px;height:70px;border-radius:50%;" alt=""> -->
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{dst.Hotel_Name}}
+                        </td>
+                        <td>{{dst.Room_Category}}</td>
+                        <td>{{dst.Destination_Near}}</td>
+                        <td><a href="{%url 'DeleteHotel' dst.id %}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                      
+                    {% endfor %}
+                </table>
+
+            </div>
+
+        </div>
+        <div class="col-md-12">
+            <h5 class="text-center">Restaurents</h5>
+            <div class="boxe">
+                <table class="table table-dark table-stripped">
+                    <tr>
+                        <th>Resturent Name</th>
+                        <th>Destination</th>
+                        <th>Diat</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for dst in rest  %}
+
+                    <tr>
+                        <td>
+                            <!-- <img src="{{dst.image.url}}" style="width:70px;height:70px;border-radius:50%;" alt=""> -->
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{dst.Restaurants_Name}}
+                        </td>
+                        <td>{{dst.Destination_Near}}</td>
+                        <td>{{dst.Diat_and_menu}}</td>
+                        <td><a href="{%url 'DeleteRestarent' dst.id %}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                      
+                    {% endfor %}
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- off canvas  -->
+
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel" class="text-info">Add A Guide</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+
+    <form method="post" action="{%url 'GuideAdd' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for i in form %}
+{{i.label}}: <br>
+        {{i}} <br><br>
+
+        {% endfor %}
+
+        <button class="btn btn-info">Add Now</button>
+    </form>
+    
+  </div>
+</div> 
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight1" aria-labelledby="offcanvasRightLabel1">
+    <div class="offcanvas-header">
+      <h5 id="offcanvasRightLabel" class="text-info">Add Hotel</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+  
+      <form action="{%url 'HotelAdd' %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% for i in form2 %}
+  {{i.label}}: <br>
+          {{i}} <br><br>
+  
+          {% endfor %}
+  
+          <button class="btn btn-info">Add Now</button>
+      </form>
+      
+    </div>
+  </div>  
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight2" aria-labelledby="offcanvasRightLabel1">
+    <div class="offcanvas-header">
+      <h5 id="offcanvasRightLabel" class="text-info">Add Restaurent</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+  
+      <form action="{%url 'RestaurentAdd' %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% for i in form3 %}
+  {{i.label}}: <br>
+          {{i}} <br><br>
+  
+          {% endfor %}
+  
+          <button class="btn btn-info">Add Now</button>
+      </form>
+      
+    </div>
+  </div>  
+{% endblock%}

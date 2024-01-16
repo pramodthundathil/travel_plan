@@ -1,0 +1,175 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+ <!-- Blog Start -->
+ <div class="container-fluid py-5">
+    <div class="container py-5">
+<h5><a href="{%url 'OnContryClick' desti.contry.id %}"><i class="bi bi-arrow-left-circle"></i>  Back To Destination</a></h5>
+<br><br>
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Blog Detail Start -->
+                <div class="pb-3">
+                    <div class="blog-item">
+                        <div class="position-relative">
+                            <img class="img-fluid w-100" src="{{desti.image.url}}" alt="">
+                            <div class="blog-date">
+                                <h6 class="font-weight-bold mb-n1">{{desti.contry}}</h6>
+                                <!-- <small class="text-white text-uppercase">Jan</small> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white mb-3" style="padding: 30px;">
+                        <div class="d-flex mb-3">
+                            <a class="text-primary text-uppercase text-decoration-none" href="">{{desti.destination_name}}</a>
+                            <span class="text-primary px-2">|</span>
+                            <a class="text-primary text-uppercase text-decoration-none" href="">{{desti.place}}</a>
+                        </div>
+                        <h2 class="mb-3">{{desti.attractions}}</h2>
+                        <p>{{desti.address}}</p>
+                        
+                    </div>
+                </div>
+                <!-- Blog Detail End -->
+
+                <!-- Comment List Start -->
+                <div class="bg-white" style="padding: 30px; margin-bottom: 30px;">
+                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Guides</h4>
+
+                    {% for gud in guide  %}
+                      
+                    <div class="media mb-4">
+                        <img src="{{gud.Guide_pic.url}}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                        <div class="media-body">
+                            <h6><a href="">{{gud.Guid_Name}}</a> <small><i></i></small></h6>
+                            <p>{{gud.Phone}} <br>
+                            {{gud.Service}}</p>
+                            <button class="btn btn-sm btn-outline-primary">Book</button>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+
+                    
+                    
+                </div>
+                <!-- Comment List End -->
+
+                <!-- Comment Form Start -->
+                
+                <!-- Comment Form End -->
+            </div>
+
+            <div class="col-lg-4 mt-5 mt-lg-0">
+                <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Packages</h4>
+
+                <!-- Author Bio -->
+                {% for pak in paki %}
+                  
+                <div class="d-flex flex-column text-center bg-white mb-5 py-5 px-4">
+                    <img src="{{pak.image.url}}" class="img-fluid mx-auto mb-3" style="width: 200px;">
+                    <h6 class="text-primary mb-3">{{pak.key_words}}</h6>
+                    <p>{{pak.description}}</p>
+                    <div class="d-flex justify-content-center">
+                        <a class="text-primary px-2" href="">
+                            Days: {{pak.number_of_days}}
+                        </a>
+                        <a class="text-primary px-2" href="">
+                            Nights: {{pak.number_of_nights}}
+                        </a>
+                        <a class="text-primary px-2" href="">
+                            Personals: {{pak.number_of_persons}}
+                        </a>
+                        <a class="text-primary px-2" href="">
+                            Price: {{pak.amount}}
+                        </a>
+                        <br><br>
+                    </div>
+                    <br><br>
+                    <a href="" class="btn btn-outline-primary">Book</a>
+
+                </div>
+
+                {% endfor %}
+
+
+                
+
+                <!-- Search Form -->
+                <!-- <div class="mb-5">
+                    <div class="bg-white" style="padding: 30px;">
+                        <div class="input-group">
+                            <input type="text" class="form-control p-4" placeholder="Keyword">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-primary border-primary text-white"><i
+                                        class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Category List -->
+                <div class="mb-5">
+                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Travel Routes</h4>
+                    {% for rot in route %}
+
+                    <div class="bg-white" style="padding: 30px;">
+                        <ul class="list-inline m-0">
+                            <h5>{{rot.mode_of_travel}} travel</h5>
+                            {{rot.straing_time}} <i class="fa fa-angle-right text-primary mr-2"></i> {{rot.ending_time}}
+                              
+                            <li class="mb-3 d-flex justify-content-between align-items-center">
+                                <a class="text-dark" href="#">
+                                    {{rot.staring_from}}</a>
+                                    <a class="text-dark" href="#"><i class="fa fa-angle-right text-primary mr-2"></i>
+                                        {{rot.destination}}</a>
+                            <span>Travel Time: {{rot.Time_Taken_toTravel_in_Hours}}Hrs</span>
+
+
+                            </li>
+                            <a href="" class="badge badge-primary badge-pill">Book</a>
+
+                           
+                        </ul>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+                <!-- Recent Post -->
+                <div class="mb-5">
+                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Near Resturents</h4>
+                    {% for res in rest %}
+                      
+                    <a class="d-flex align-items-center text-decoration-none bg-white mb-3" href="">
+                        <img class="img-fluid" src="{{res.Restaurent_pic.url}}" width="20%" height="100%" alt="">
+                        <div class="pl-3">
+                            <h6 class="m-1">{{res.Restaurants_Name}}</h6>
+                            <small>{{res.Diat_and_menu}}</small>
+                        </div>
+                    </a>
+                    {% endfor %}
+
+                    
+                </div>
+
+                <!-- Tag Cloud -->
+                <!-- <div class="mb-5">
+                    <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Tag Cloud</h4>
+                    <div class="d-flex flex-wrap m-n1">
+                        <a href="" class="btn btn-light m-1">Design</a>
+                        <a href="" class="btn btn-light m-1">Development</a>
+                        <a href="" class="btn btn-light m-1">Marketing</a>
+                        <a href="" class="btn btn-light m-1">SEO</a>
+                        <a href="" class="btn btn-light m-1">Writing</a>
+                        <a href="" class="btn btn-light m-1">Consulting</a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog End -->
+
+{% endblock %}
