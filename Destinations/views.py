@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
-from .models import Destination, Contry, Packages, Journey, TourGuids, Restaurants, Hotels
+from .models import Destination, Contry, Packages, Journey, TourGuids, Restaurants, Hotels, PackageBooking, JournyBooking, TourGuideBooking, HotelBooking
 from .forms import DestinationAddForm, ContryAddForm, PackageAddForm, PackageAddForm, JournyAddForm, GuideAddForm, HotelAddForm, RestaurentAddForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 def DestinationHome(request):
@@ -194,5 +195,149 @@ def DeleteRestarent(request,pk):
     return redirect("Services")
 
 
+
+# bookings 
+def BookingConfirm(request):
+    return render(request, "bookingconfirm.html")
+
+@login_required(login_url="SignIn")
+def BookPackage(request,pk):
+    package = Packages.objects.get(id = pk)
+    if request.method == "POST":
+        name = request.POST['name']
+        phone = request.POST['phone']
+        address = request.POST['address']
+        date = request.POST["date"]
+        booking = PackageBooking.objects.create(package = package,user = request.user,booker_Name = name, booker_phone = phone, booker_address = address, booking_date = date, status = "Package Booked" )
+        booking.save()
+        return redirect("BookingConfirm")
+    context = {
+        "package":package
+    }
+
+    return render(request, "bookpackage.html",context)
+
+@login_required(login_url="SignIn")
+def BookGuide(request,pk):
+    guide = TourGuids.objects.get(id = pk)
+
+    if request.method == "POST":
+        name = request.POST['name']
+        phone = request.POST['phone']
+        address = request.POST['address']
+        date = request.POST["date"]
+        booking = TourGuideBooking.objects.create(guide = guide,user = request.user,booker_Name = name, booker_phone = phone, booker_address = address, booking_date = date, status = "Guide Booked" )
+        booking.save()
+        return redirect("BookingConfirm")
+
+    context = {
+        "guide":guide
+    }
+    return render(request, "bookguide.html",context)
+
+
+@login_required(login_url="SignIn")
+def BookJourny(request,pk):
+    journy = Journey.objects.get(id = pk)
+
+    if request.method == "POST":
+        name = request.POST['name']
+        phone = request.POST['phone']
+        address = request.POST['address']
+        date = request.POST["date"]
+        booking = JournyBooking.objects.create(journy = journy,user = request.user,booker_Name = name, booker_phone = phone, booker_address = address, booking_date = date, status = "Guide Booked" )
+        booking.save()
+        return redirect("BookingConfirm")
+
+    context = {
+        "journy":journy
+    }
+    
+    return render(request, "booktransportation.html",context)
     
 
+@login_required(login_url="SignIn")
+def BookHotel(request,pk):
+    hotel = Hotels.objects.get(id= pk)
+
+    if request.method == "POST":
+        name = request.POST['name']
+        phone = request.POST['phone']
+        address = request.POST['address']
+        date = request.POST["date"]
+        booking = HotelBooking.objects.create(Hotel = hotel,user = request.user,booker_Name = name, booker_phone = phone, booker_address = address, booking_date = date, status = "Hotel Booked" )
+        booking.save()
+        return redirect("BookingConfirm")
+
+    context = {
+        "hotel":hotel
+    }
+    
+    return render(request, "bookhotel.html",context)
+
+
+@login_required(login_url="SignIn")
+def Mybookings(request):
+    hotel = HotelBooking.objects.filter(user = request.user)
+    package = PackageBooking.objects.filter(user = request.user)
+    guid =  TourGuideBooking.objects.filter(user = request.user)
+    route = JournyBooking.objects.filter(user = request.user)
+
+    context = {
+        "hotel":hotel,
+        "package":package,
+        "guid":guid,
+        "route":route
+    }
+
+    return render(request, "mybookins.html",context)
+
+
+@login_required(login_url="SignIn")
+def Bookings(request):
+    hotel = HotelBooking.objects.all()
+    package = PackageBooking.objects.all()
+    guid =  TourGuideBooking.objects.all()
+    route = JournyBooking.objects.all()
+
+    context = {
+        "hotel":hotel,
+        "package":package,
+        "guid":guid,
+        "route":route
+    }
+
+    return render(request, "bookings.html",context)
+
+
+def deleteHotelBooking(request,pk):
+    HotelBooking.objects.get(id = pk).delete()
+    return redirect("Index")
+
+def deleteGuideBooking(request,pk):
+    TourGuideBooking.objects.get(id = pk).delete()
+    return redirect("Index")
+
+def deleteJournyBooking(request,pk):
+    JournyBooking.objects.get(id = pk).delete()
+    return redirect("Index")
+
+def deletePackageBooking(request,pk):
+    PackageBooking.objects.get(id = pk).delete()
+    return redirect("Index")
+
+
+def Search(request):
+    if request.method == "POST":
+        search = request.POST["search"]
+        desti = Destination.objects.filter(destination_name__contains = search)
+
+        context = {
+            "desti":desti
+        }
+
+        return render(request,"search.html",context)
+
+
+
+    

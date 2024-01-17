@@ -1,0 +1,80 @@
+{% extends "index.html" %}
+{% block content %}
+
+<style>
+    .content{
+        width:90%;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        border: 1px solid lightgreen;
+        padding: 20px;
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <div class="content">
+        <h3>Book Journy</h3>
+        <br><br>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-info mb-3">Route Information</h6>
+                <table class="table table-striped border-0">
+                    <tr>
+                        <tr>
+                            <th>Travel Mode</th>
+                            <td>{{journy.mode_of_travel}}</td>
+                        </tr>
+                        <tr>
+                            <th>Starting From</th>
+                            <td>{{journy.staring_from}}</td>
+                        </tr>
+                        <th>
+                            Destination
+                        </th>
+                        <td>
+                        {{journy.destination}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Time:</th>
+                        <td>{{journy.straing_time}}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Travel Hours</th>
+                        <td>{{journy.Time_Taken_toTravel_in_Hours}}</td>
+                    </tr>
+                   
+                    <tr>
+                        <th>Cost</th>
+                        <td>{{journy.cost}}</td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-info mb-3">Booking Information</h6>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="text" placeholder="Name of Customer" class="form-control" name="name" required><br><br>
+                    <input type="text" placeholder="Phone Number of Customer" class="form-control" name="phone" required> <br><br>
+                    <input type="text" placeholder="Address Of customer" class="form-control" name="address" required><br><br>
+                    <input type="date"  class="form-control" name="date" required><br><br>
+
+                    <button type="submit" class="btn btn-outline-success">Book</button>
+                </form>
+            </div>
+        </div>
+
+        
+
+    </div>
+
+    </div>
+</div>
+  
+{% endblock %}

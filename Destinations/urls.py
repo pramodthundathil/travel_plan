@@ -17,5 +17,17 @@ urlpatterns = [
     path("DeleteHotel/<int:pk>",views.DeleteHotel,name="DeleteHotel"),
     path("DeleteGuide/<int:pk>",views.DeleteGuide,name="DeleteGuide"),
     path("DeleteRestarent/<int:pk>",views.DeleteRestarent,name="DeleteRestarent"),
+    path("BookJourny/<int:pk>",views.BookJourny,name="BookJourny"),
+    path("BookGuide/<int:pk>",views.BookGuide,name="BookGuide"),
+    path("BookPackage/<int:pk>",views.BookPackage,name="BookPackage"),
+    path("BookHotel/<int:pk>",views.BookHotel,name="BookHotel"),
+    path("BookingConfirm",views.BookingConfirm,name="BookingConfirm"),
+    path("Mybookings",views.Mybookings,name="Mybookings"),
+    path("Bookings",views.Bookings,name="Bookings"),
+    path("deletePackageBooking/<int:pk>",views.deletePackageBooking,name="deletePackageBooking"),
+    path("deleteJournyBooking/<int:pk>",views.deleteJournyBooking,name="deleteJournyBooking"),
+    path("deleteGuideBooking/<int:pk>",views.deleteGuideBooking,name="deleteGuideBooking"),
+    path("deleteHotelBooking/<int:pk>",views.deleteHotelBooking,name="deleteHotelBooking"),
+    path("Search",views.Search,name="Search"),
 
-]
+]     

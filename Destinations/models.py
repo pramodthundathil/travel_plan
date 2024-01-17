@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Contry(models.Model):
@@ -78,6 +79,51 @@ class TourGuids(models.Model):
     Destination_Near = models.ForeignKey(Destination, on_delete=models.SET_NULL,null=True,blank=True)
     Service = models.CharField(max_length=1000)
     Guide_pic = models.FileField(upload_to="Guide_pic") 
+
+
+
+class PackageBooking(models.Model):
+    package = models.ForeignKey(Packages, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    booker_Name = models.CharField(max_length=255,null=True)
+    booker_phone = models.CharField(max_length=255,null=True)
+    booker_address = models.CharField(max_length=255,null=True)
+    booking_date = models.DateField(auto_now_add=False,null=True)
+    date = models.DateField(auto_now_add=True)
+    status = models.CharField(max_length=255)
+
+class TourGuideBooking(models.Model):
+    guide = models.ForeignKey(TourGuids, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    booker_Name = models.CharField(max_length=255,null=True)
+    booker_phone = models.CharField(max_length=255,null=True)
+    booker_address = models.CharField(max_length=255,null=True)
+    booking_date = models.DateField(auto_now_add=False,null=True)
+    date = models.DateField(auto_now_add=True)
+    status = models.CharField(max_length=255)
+
+class JournyBooking(models.Model):
+    journy = models.ForeignKey(Journey, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    booker_Name = models.CharField(max_length=255,null=True)
+    booker_phone = models.CharField(max_length=255,null=True)
+    booker_address = models.CharField(max_length=255,null=True)
+    booking_date = models.DateField(auto_now_add=False,null=True)
+    date = models.DateField(auto_now_add=True)
+    status = models.CharField(max_length=255)
+
+
+
+class HotelBooking(models.Model):
+    Hotel = models.ForeignKey(Hotels, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    booker_Name = models.CharField(max_length=255)
+    booker_phone = models.CharField(max_length=255)
+    booker_address = models.CharField(max_length=255)
+    booking_date = models.DateField(auto_now_add=False)
+    date = models.DateField(auto_now_add=True)
+    status = models.CharField(max_length=255)
+
 
 
 

@@ -77,18 +77,19 @@
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
                         <a href="{%url 'Index'%}" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
                         <a href="service.html" class="nav-item nav-link">Services</a>
                         <a href="#package" class="nav-item nav-link">Tour Packages</a>
                         {% if request.user.is_authenticated %}
+                        <a href="{%url 'Mybookings' %}" class="nav-item nav-link">My Booking</a>
+
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Profile</a>
                             <div class="dropdown-menu border-0 rounded-0 m-0">
-                                <a href="blog.html" class="dropdown-item">My Bookings</a>
-                                <a href="single.html" class="dropdown-item">Visited Places</a>
+                                <a href="{%url 'Mybookings' %}" class="dropdown-item">My Bookings</a>
+                                <!-- <a href="single.html" class="dropdown-item">Visited Places</a>
                                 <a href="destination.html" class="dropdown-item">Travel History</a>
                                 <a href="guide.html" class="dropdown-item">Travel Guides</a>
-                                <a href="testimonial.html" class="dropdown-item">My Profile</a>
+                                <a href="testimonial.html" class="dropdown-item">My Profile</a> -->
                             </div>
                         </div>
                         
@@ -165,12 +166,14 @@
             <div class="bg-light shadow" style="padding: 30px;">
                 <div class="row align-items-center" style="min-height: 60px;">
                     <div class="col-md-10">
-                        <form action="" method="post">
+                        <form action="{%url 'Search' %}" method="post">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="mb-3 mb-md-0">
+                                    
+                                        {% csrf_token %}
                                     <div class="date" id="date2" data-target-input="nearest">
-                                        <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Search Destination"  required/>
+                                        <input type="text" class="form-control p-4 datetimepicker-input" name="search" placeholder="Search Destination"  required/>
                                     </div>
                                 </div>
                             </div>
@@ -179,6 +182,7 @@
                     </div>
                     <div class="col-md-2">
                         <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Search</button>
+                        
                     </div>
                 </form>
                 </div>
@@ -293,7 +297,7 @@
 
 
     <!-- Service Start -->
-    <div class="container-fluid py-5">
+    <!-- <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <div class="text-center mb-3 pb-3">
                 <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Services</h6>
@@ -323,7 +327,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Service End -->
 
 
@@ -351,6 +355,7 @@
                                 <div class="d-flex justify-content-between">
                                     <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
                                     <h5 class="m-0">₹{{i.amount}}</h5>
+                                    <a class="btn btn-primary" href="{%url 'BookPackage' i.id %}">Book Now</a>
                                 </div>
                             </div>
                         </div>
@@ -390,7 +395,7 @@
                         <div class="text-center py-4">
                             <h5 class="text-truncate">{{guid.Guid_Name}}</h5>
                             <p class="m-0">{{guid.Destination_Near}}</p>
-                            <p class="m-0"><a href="" class="btn btn-primary mt-1">Book</a></p>
+                            <p class="m-0"><a href="{%url 'BookGuide' guid.id %}" class="btn btn-primary mt-1">Book</a></p>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% block content %}
+
+<style>
+    .content{
+        width:90%;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        border: 1px solid lightgreen;
+        padding: 20px;
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <div class="content">
+        <a href="{%url 'Index' %}" class="text-success h3">Back To Home</a>
+        <h2 class="display-3 text-info">Your Booking Was Confiremed</h2>
+        <br><br>
+    </div>
+</div>
+
+{% endblock %}

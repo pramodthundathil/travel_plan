@@ -54,6 +54,8 @@
                             <div class="d-flex justify-content-between">
                                 <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
                                 <h5 class="m-0">₹{{i.amount}}</h5>
+                                <a class="btn btn-primary" href="{%url 'BookPackage' i.id %}">Book Now</a>
+
                             </div>
                         </div>
                     </div>
@@ -67,30 +69,7 @@
 <!-- Packages End -->
 
 
-<!-- Destination Start -->
-<div class="container-fluid py-5">
-    <div class="container pt-5 pb-3">
-        <div class="text-center mb-3 pb-3">
-            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Destination</h6>
-            <h1>Explore Top Destination</h1>
-        </div>
-        <div class="row">
-            {% for c in desti  %}
-                  
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="destination-item position-relative overflow-hidden mb-2">
-                        <img class="img-fluid" src="{{c.image.url}}" alt="">
-                        <a class="destination-overlay text-white text-decoration-none" href="{%url 'OnDestinationClick' c.id %}">
-                            <h5 class="text-white">{{c.destination_name}}</h5>
-                            <span></span>
-                        </a>
-                    </div>
-                </div>
 
-                {% endfor %}
-        </div>
-    </div>
-</div>
 <!-- Destination Start -->
   
 {% endblock %}

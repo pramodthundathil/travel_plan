@@ -45,7 +45,7 @@
                             <h6><a href="">{{gud.Guid_Name}}</a> <small><i></i></small></h6>
                             <p>{{gud.Phone}} <br>
                             {{gud.Service}}</p>
-                            <button class="btn btn-sm btn-outline-primary">Book</button>
+                            <a href="{%url 'BookGuide' gud.id %}" class="btn btn-sm btn-outline-primary">Book</a>
                         </div>
                     </div>
 
@@ -87,7 +87,37 @@
                         <br><br>
                     </div>
                     <br><br>
-                    <a href="" class="btn btn-outline-primary">Book</a>
+                    <a href="{%url 'BookPackage' pak.id %}" class="btn btn-outline-primary">Book</a>
+
+                </div>
+
+                {% endfor %}
+
+
+                <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Hotels</h4>
+
+                <!-- Author Bio -->
+                {% for pak in hotels %}
+                  
+                <div class="d-flex flex-column text-center bg-white mb-5 py-5 px-4">
+                    <img src="{{pak.Hotel_pic.url}}" class="img-fluid mx-auto mb-3" style="width: 200px;">
+                    <h6 class="text-primary mb-3">{{pak.Hotel_Name}}</h6>
+                    <p>{{pak.description}}</p>
+                    <div class="d-flex justify-content-center">
+                        <a class="text-primary px-2" href="">
+                            Room: {{pak.Room_Category}}
+                        </a>
+                        <a class="text-primary px-2" href="">
+                            Aminities: {{pak.Aminities}}
+                        </a>
+                        
+                        <a class="text-primary px-2" href="">
+                            Price: {{pak.Price}}
+                        </a>
+                        <br><br>
+                    </div>
+                    <br><br>
+                    <a href="{%url 'BookHotel' pak.id %}" class="btn btn-outline-primary">Book</a>
 
                 </div>
 
@@ -128,7 +158,7 @@
 
 
                             </li>
-                            <a href="" class="badge badge-primary badge-pill">Book</a>
+                            <a href="{%url 'BookJourny' rot.id %}" class="badge badge-primary badge-pill">Book</a>
 
                            
                         </ul>
