@@ -29,5 +29,8 @@ urlpatterns = [
     path("deleteGuideBooking/<int:pk>",views.deleteGuideBooking,name="deleteGuideBooking"),
     path("deleteHotelBooking/<int:pk>",views.deleteHotelBooking,name="deleteHotelBooking"),
     path("Search",views.Search,name="Search"),
+    path("RouteSearch",views.RouteSearch,name="RouteSearch"),
+    path("RouteSearch1",views.RouteSearch1,name="RouteSearch1"),
+
 
 ]     

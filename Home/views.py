@@ -30,6 +30,10 @@ def Index(request):
     }
     return render(request,"index.html",context)
 
+@admin_only
+def IndexOne(request):
+    return render(request,"indexone.html")
+
 
 def AdminHome(request):
     desti = Destination.objects.all()
@@ -63,7 +67,7 @@ def SignIn(request):
             request.session['username'] = username
             request.session['password'] = password
             login(request, user1)
-            return redirect('Index')
+            return redirect('IndexOne')
         
         else:
             messages.info(request,'Username or Password Incorrect')
@@ -124,7 +128,7 @@ def SignUp(request):
 
 def SignOut(request):
     logout(request)
-    return redirect('Index')
+    return redirect('IndexOne')
 
 
 

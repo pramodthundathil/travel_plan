@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include("Home.urls")),
     path("destinations/",include("Destinations.urls")),
+    path("journy/",include("journy.urls"))
 
     
 ]

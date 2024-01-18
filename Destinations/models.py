@@ -41,15 +41,21 @@ class Packages(models.Model):
 
 class Journey(models.Model):
     options = (("air","air"),("train","train"),("bus","bus"),("other","other"))
-    staring_from = models.CharField(max_length=255)
-    straing_time = models.TimeField()
-    destination = models.CharField(max_length=255)
+    staring_from = models.CharField(max_length=255,null=True,blank=True)
+    spincode = models.IntegerField(null=True,blank=True)
+    start_date = models.DateField(auto_now_add=False,null=True,blank=True),
+    straing_time = models.TimeField(null=True,blank=True)
+    destination = models.CharField(max_length=255,null=True,blank=True)
+    epincode = models.IntegerField(null=True,blank=True)
+    stopbetween_mode = models.CharField(max_length=255, choices=options,null=True,blank=True)
+    stop_beteween = models.CharField(max_length=255,null=True)
     destination_include = models.ForeignKey(Destination, on_delete=models.SET_NULL,null=True,blank=True)
-    ending_time = models.TimeField()
-    Time_Taken_toTravel_in_Hours = models.FloatField()
-    mode_of_travel = models.CharField(max_length=255, choices=options)
-    cost = models.IntegerField()
-    total_Kilomeaters = models.FloatField()
+    end_date = models.DateField(auto_now_add=False,null=True,blank=True),
+    ending_time = models.TimeField(null=True,blank=True)
+    Time_Taken_toTravel_in_Hours = models.FloatField(null=True,blank=True)
+    mode_of_travel = models.CharField(max_length=255, choices=options,null=True,blank=True)
+    cost = models.IntegerField(null=True,blank=True)
+    total_Kilomeaters = models.FloatField(null=True,blank=True)
 
 
 class Hotels(models.Model):

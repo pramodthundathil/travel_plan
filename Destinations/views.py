@@ -3,6 +3,8 @@ from .models import Destination, Contry, Packages, Journey, TourGuids, Restauran
 from .forms import DestinationAddForm, ContryAddForm, PackageAddForm, PackageAddForm, JournyAddForm, GuideAddForm, HotelAddForm, RestaurentAddForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+import requests
+import json
 
 
 def DestinationHome(request):
@@ -80,26 +82,87 @@ def RouteHome(request):
     desti = Destination.objects.all()
     paki = Packages.objects.all()
     form = JournyAddForm()
-    jour = Journey.objects.all()
+    jou = Journey.objects.all()
+
+    # if request.method == "POST":
+    #     form = JournyAddForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         messages.success(request,"Route is Saved")
+    #         return redirect("RouteHome")
+    #     else:
+    #         messages.info(request,"Form Data not valid")
+    #         return redirect("RouteHome")
 
     if request.method == "POST":
+        mode = request.POST["mode"]
+        hpoint = request.POST["hpoint"]
+        spoint = request.POST["spoint"]
+        spin = request.POST["spin"]
+        stime = request.POST["stime"]
+        hpin = request.POST["hpin"]
+        epoint = request.POST["epoint"]
+        epin = request.POST["epin"]
+        etime = request.POST["etime"]
+        cost = request.POST["cost"]
+        km = request.POST["km"]
+        ttime = request.POST["ttime"]
+        sbmode = request.POST["sbmode"]
+
+
+        try:
+            resp2 = requests.get("https://api.data.gov.in/resource/6176ee09-3d56-4a3b-8115-21841576b2f6?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&filters%5Bpincode%5D={}".format(spin))
+            val2 = json.loads(resp2.content)
+            startpoint = val2["records"][0]["officename"]
+            print(startpoint)
+        except:
+            messages.info(request,"Starting Point Pincode Is not Valid")
+            return redirect("RouteHome")
+
+        try:
+            resp2 = requests.get("https://api.data.gov.in/resource/6176ee09-3d56-4a3b-8115-21841576b2f6?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&filters%5Bpincode%5D={}".format(epin))
+            val2 = json.loads(resp2.content)
+            endpoint = val2["records"][0]["officename"]
+            print(endpoint)
+        except:
+            messages.info(request,"Ending Point Pincode Is not Valid")
+            return redirect("RouteHome")
+
         form = JournyAddForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request,"Route is Saved")
+            jour = form.save()
+            jour.staring_from = startpoint
+            jour.spincode = spin
+            jour.straing_time = stime
+            jour.destination = endpoint
+            jour.epincode = epin
+            jour.stop_beteween = hpoint
+            jour.stopbetween_mode = sbmode
+            jour.ending_time = etime
+            jour.Time_Taken_toTravel_in_Hours = ttime
+            jour.mode_of_travel = mode
+            jour.cost = cost
+            jour.total_Kilomeaters = km
+            jour.save()
+
+            messages.info(request,"new travel route saved")
             return redirect("RouteHome")
-        else:
-            messages.info(request,"Form Data not valid")
-            return redirect("RouteHome")
+
+        # jour = Journey.objects.create(staring_from,spincode,straing_time,destination,ending_time,Time_Taken_toTravel_in_Hours,mode_of_travel,cost,total_Kilomeaters)
+
+        return redirect("RouteHome")
 
     context = {
         "noofdesti":len(desti),
         "lenpaki":len(paki),
-        "jour":jour,
-        "lenjour":len(jour),
+        "jour":jou,
+        "lenjour":len(jou),
         "form":form,
     }
     return render(request, "routes.html",context)
+
+
+
 
 def DeleteRoute(request,pk):
     Journey.objects.get(id = pk).delete()
@@ -337,6 +400,34 @@ def Search(request):
         }
 
         return render(request,"search.html",context)
+
+def RouteSearch(request):
+    if request.method == "POST":
+        start = request.POST["start"]
+        end = request.POST["end"]
+
+        journy = Journey.objects.filter(staring_from__contains = start, destination__contains = end).order_by("Time_Taken_toTravel_in_Hours")
+
+        context = {
+            "journy":journy
+        }
+        return render(request,"search2.html",context)
+
+    return render(request,"search2.html")
+
+def RouteSearch1(request):
+    if request.method == "POST":
+        start = request.POST["start"]
+        end = request.POST["end"]
+
+        journy = Journey.objects.filter(staring_from__contains = start, destination__contains = end).order_by("Time_Taken_toTravel_in_Hours")
+
+        context = {
+            "journy":journy
+        }
+        return render(request,"indexone.html",context)
+
+    return render(request,"indexone.html")
 
 
 

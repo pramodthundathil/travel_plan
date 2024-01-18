@@ -57,19 +57,12 @@ class JournyAddForm(ModelForm):
 
     class Meta:
         model = Journey
-        fields = "__all__"
+        fields = ["destination_include",]
 
         widgets = {
-            'staring_from': TextInput(attrs={'class': 'form-control p','placeholder':'Starting From'}),
-            'straing_time': TextInput(attrs={'class': 'form-control p','placeholder':'Starting Time',"type":"time"}),
-            'destination': TextInput(attrs={'class': 'form-control p','placeholder':'Destination',}),
-            'ending_time': TextInput(attrs={'class': 'form-control','placeholder':'Ending Time',"type":"time"}),
-            'amount': TextInput(attrs={'class': 'form-control','placeholder':'Amount', "type":"number"}),
+            
             "destination_include": Select(attrs={'class': 'form-control','placeholder':'Mode Of travel'}),
-            "mode_of_travel": Select(attrs={'class': 'form-control','placeholder':'Mode Of travel'}),
-            "cost": TextInput(attrs={'class': 'form-control','placeholder':'Cost',"type":"number","min":0}),
-            "total_Kilomeaters": TextInput(attrs={'class': 'form-control','placeholder':'Kilomiters',"type":"number","min":0}),   
-            "Time_Taken_toTravel_in_Hours": TextInput(attrs={'class': 'form-control','placeholder':'Time Taken to Travel',"type":"number","min":0}),   
+               
 
         }
 

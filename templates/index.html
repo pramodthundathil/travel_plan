@@ -76,8 +76,8 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="{%url 'Index'%}" class="nav-item nav-link active">Home</a>
-                        <a href="service.html" class="nav-item nav-link">Services</a>
+                        <a href="{%url 'IndexOne'%}" class="nav-item nav-link active">Home</a>
+                        <a href="{%url 'Index'%}" class="nav-item nav-link ">Utilities</a>
                         <a href="#package" class="nav-item nav-link">Tour Packages</a>
                         {% if request.user.is_authenticated %}
                         <a href="{%url 'Mybookings' %}" class="nav-item nav-link">My Booking</a>
@@ -164,6 +164,49 @@
     <div class="container-fluid booking mt-5 pb-5">
         <div class="container pb-5">
             <div class="bg-light shadow" style="padding: 30px;">
+            <h4>Route Search</h4>
+
+                <div class="row align-items-center" style="min-height: 60px;">
+                    <div class="col-md-10">
+                        <form action="{%url 'RouteSearch' %}" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3 mb-md-0">
+                                    
+                                        {% csrf_token %}
+                                    <div class="date" id="date2" data-target-input="nearest">
+                                        <input type="text" class="form-control p-4 datetimepicker-input" name="start" placeholder="Start point"  required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3 mb-md-0">
+                                    
+                                       
+                                    <div class="date" id="date2" data-target-input="nearest">
+                                        <input type="text" class="form-control p-4 datetimepicker-input" name="end" placeholder="Destination"  required/>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Search</button>
+                        
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid booking mt-5 pb-5">
+        <div class="container pb-5">
+            <div class="bg-light shadow" style="padding: 30px;">
+            <h4>Destination Search</h4>
+
                 <div class="row align-items-center" style="min-height: 60px;">
                     <div class="col-md-10">
                         <form action="{%url 'Search' %}" method="post">
@@ -299,7 +342,7 @@
     <!-- Service Start -->
     <!-- <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
-            <div class="text-center mb-3 pb-3">
+            <div class="text-center mb-3 pb-3">route
                 <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Services</h6>
                 <h1>Tours & Travel Services</h1>
             </div>

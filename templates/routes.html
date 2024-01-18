@@ -61,20 +61,60 @@
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
-    <h5 id="offcanvasRightLabel" class="text-info">Add Trasportation Routes</h5>
+    <h5 id="offcanvasRightLabel" class="text-info">Add Trasportation Routes</h5><br><br>
+    <h6 class="text-warning">now the roues available in india only</h6>
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <label for="">Tourist Destination:</label>
         {% for i in form %}
-        {{i.label}}:
-        {{i}} <br><br>
-        
+
+        {{i}} <br>
 
         {% endfor %}
 
+        <label for="">Mode of Travel:</label>
+        <select name="mode" id="" class="form-control" required>
+          <option value="" selected disabled>---------------</option>
+          <option value="air">Air</option>
+          <option value="bus">Bus</option>
+          <option value="train">Train</option>
+          <option value="other">other</option>
+        </select><br>
+        <label for="">Starting Place</label>
+        <input type="text" name="spoint" class="form-control" required><br>
+        <label for="">Starting Picode <small class="text-danger">*importent to update correct pincode</small></label>
+        <input type="number" name="spin" class="form-control" required><br>
+        <label for="">Starting Time</label>
+        <input type="time" name="stime" class="form-control" required><br>
+        <label for="">Halt Destination <small class="text-info">*optional</small></label>
+        <input type="text" name="hpoint" class="form-control"><br>
+        <label for="">Halt Destination pin code<small class="text-info">*optional</small></label>
+        <input type="text" name="hpin" class="form-control"><br>
+        <label for="">Mode of Travel Halt Destination<small class="text-info"> *optional</small>:</label>
+        <select name="sbmode" id="" class="form-control" required>
+          <option value="" selected disabled>---------------</option>
+          <option value="air">Air</option>
+          <option value="bus">Bus</option>
+          <option value="train">Train</option>
+          <option value="other">other</option>
+        </select><br>
+        <label for="">Ending Destination</label>
+        <input type="text" name="epoint" class="form-control" required><br>
+        <label for="">Ending pincode <small class="text-danger">*importent to update correct pincode</small></label>
+        <input type="number" name="epin" class="form-control" required><br>
+        <label for="">Ending  Time</label>
+        <input type="time" name="etime" class="form-control" required><br>
+        <label for="">Cost </label>
+        <input type="number" name="cost" class="form-control" required><br>
+        <label for="">Total Kilometers </label>
+        <input type="number" name="km" class="form-control" required><br>
+        <label for="">Time Taken To Travel </label>
+        <input type="number" name="ttime" class="form-control" required><br>
+        <br><br>
         <button class="btn btn-info">Add Now</button>
     </form>
     
