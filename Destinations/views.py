@@ -447,7 +447,7 @@ def GuideBooking(request):
     }
     return render(request,"travelguidbooking.html",context)
 
-def HotelBooking(request):
+def HotelBookingss(request):
     context = {
         "hotels":Hotels.objects.all()
     }

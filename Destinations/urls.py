@@ -33,7 +33,7 @@ urlpatterns = [
     path("RouteSearch1",views.RouteSearch1,name="RouteSearch1"),
     path("DesionationsView",views.DesionationsView,name="DesionationsView"),
     path("GuideBooking",views.GuideBooking,name="GuideBooking"),
-    path("HotelBooking",views.HotelBooking,name="HotelBooking"),
+    path("HotelBookingss",views.HotelBookingss,name="HotelBookingss"),
 
 
 
