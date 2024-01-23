@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+{% block content %}
+
+<style>
+    .content{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .items{
+        width:300px;
+        padding:30px
+    }
+
+</style>
+<div class="content mt-5">
+
+{% for pak in hotels %}
+                  
+<div class="d-flex flex-column text-center bg-white mb-5 py-5 px-4 items">
+    <img src="{{pak.Hotel_pic.url}}" class="img-fluid mx-auto mb-3" style="width: 200px;">
+    <h6 class="text-primary mb-3">{{pak.Hotel_Name}}</h6>
+    <p>{{pak.description}}</p>
+    <div class="d-flex justify-content-center">
+        <a class="text-primary px-2" href="">
+            Room: {{pak.Room_Category}}
+        </a>
+        <a class="text-primary px-2" href="">
+            Aminities: {{pak.Aminities}}
+        </a>
+        
+        <a class="text-primary px-2" href="">
+            Price: {{pak.Price}}
+        </a>
+        <br><br>
+    </div>
+    <br><br>
+    <a href="{%url 'BookHotel' pak.id %}" class="btn btn-outline-primary">Book</a>
+
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}

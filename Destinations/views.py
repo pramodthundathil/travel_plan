@@ -429,6 +429,30 @@ def RouteSearch1(request):
 
     return render(request,"indexone.html")
 
+def DesionationsView(request):
+    package = Packages.objects.all()
+
+    context = {
+        "paki":package
+    }
+
+    return render(request,"destinationuser.html",context)
+
+
+def GuideBooking(request):
+
+    guids = TourGuids.objects.all()
+    context = {
+        "guids":guids
+    }
+    return render(request,"travelguidbooking.html",context)
+
+def HotelBooking(request):
+    context = {
+        "hotels":Hotels.objects.all()
+    }
+    return render(request,"hotelbooking.html",context)
+
 
 
     
