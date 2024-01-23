@@ -38,7 +38,7 @@ def admin_only(view_func):
             if group == 'user':
                 return view_func(request, *args, **kwargs)
             if group == 'staff':
-                return redirect('StaffHome')
+                return redirect('AdminHome')
             if group == 'admin':
                 return redirect('AdminHome')
         else:
