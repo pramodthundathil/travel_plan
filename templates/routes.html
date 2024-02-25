@@ -28,8 +28,8 @@
                         <th>Arrival Time</th>
                         <th>Destination</th>
                         <th>Mode Of travel</th>
+                        <th> Amount</th>
                         <th>Kilometers</th>
-                        <th>Amount</th>
                         <th>Delete</th>
                     </tr>
                     {% for dst in jour  %}
@@ -41,8 +41,8 @@
                         <td>{{dst.ending_time}}</td>
                         <td>{{dst.destination_include}}</td>
                         <td>{{dst.mode_of_travel}}</td>
-                        <td>{{dst.cost}}</td>
-                        <td>{{dst.total_Kilomeaters}}</td>
+                        <td>Rs. {{dst.cost}}</td>
+                        <td>{{dst.total_Kilomeaters}} KM</td>
                         <th><a href="{%url 'DeleteRoute' dst.id %}" class="btn btn-outline-danger">Delete</a></th>
                     </tr>
                       
@@ -95,7 +95,7 @@
         <label for="">Halt Destination pin code<small class="text-info">*optional</small></label>
         <input type="text" name="hpin" class="form-control"><br>
         <label for="">Mode of Travel Halt Destination<small class="text-info"> *optional</small>:</label>
-        <select name="sbmode" id="" class="form-control" required>
+        <select name="sbmode" id="" class="form-control" >
           <option value="" selected disabled>---------------</option>
           <option value="air">Air</option>
           <option value="bus">Bus</option>

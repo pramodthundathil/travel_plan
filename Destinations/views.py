@@ -107,7 +107,10 @@ def RouteHome(request):
         cost = request.POST["cost"]
         km = request.POST["km"]
         ttime = request.POST["ttime"]
-        sbmode = request.POST["sbmode"]
+        try:
+            sbmode = request.POST["sbmode"]
+        except:
+            sbmode = "nil"
 
 
         try:
